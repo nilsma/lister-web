@@ -1,5 +1,11 @@
 <?php
 
+/**
+* A function to get the number of invites waiting for a given user
+* @param user_id int the database user_id for the given user of which to get the number of waiting invites
+* @param mysqli mysqli the object for database the connection as defined in db_connect.php
+* @return string string a concatenation of the prefix 'invitations ' and the number of invitations
+*/
 function getInvQty($user_id, $mysqli) {
 
    if($mysqli->connect_error) {
@@ -25,6 +31,12 @@ function getInvQty($user_id, $mysqli) {
    mysqli_close($mysqli);
 }
 
+/**
+* A function that echos an option eleement for each of the lists 
+* that the given user_id is registered as owner in the database
+* @param user_id int the database user_id for the given user of which to get the number of waiting invites
+* @param mysqli mysqli the object for database the connection as defined in db_connect.php
+*/
 function getListSummary($user_id, $mysqli) {
 
    if($mysqli->connect_error) {
@@ -49,6 +61,13 @@ EOF;
    mysqli_close($mysqli);
 }
 
+/**
+* A function that echos the list_container section-element that contains the list that the
+* user is currently viewing with all of its contents/items
+* @param list_id int the database id for the given list of which to get contents of
+* @param list_name string the database name for the given list of which to get contents of
+* @param current_id string the database username for the given user whom is registered as owner of the list 
+*/
 function buildList($list_id, $list_name, $current_user) {
 include 'db_connect.php';
 echo <<<EOF
@@ -142,6 +161,11 @@ EOF;
    }
 }
 
+/**
+* A function that builds and echos the lists_overview section-element and subsequently the lists
+* that the given user owns as well as those that the user is a member of
+* @param user_id int the user_id of the given user of whom to get the lists
+*/
 function buildOverviewLists($user_id) {
 
 $owner_lists = getOwnerLists($user_id);
@@ -197,6 +221,13 @@ EOF;
 }
 }
 
+/**
+* A function to get the database lists which the given user is an owner
+* @param user_id int the user_id of the given user of whom to get the lists
+* @return return_data array an array that contains the number of lists found at index[0] and
+*                           subsequently it contains arrays containing the lists id and name at 
+*                           index[0] and index[1] respectively
+*/
 function getOwnerLists($user_id) {
 
 require 'db_connect.php';
@@ -235,6 +266,13 @@ mysqli_close($mysqli);
 
 }
 
+/**
+* A function to get the database lists which the given user is a member
+* @param user_id int the user_id of the given user of whom to get the lists
+* @return return_data array an array that contains the number of lists found at index[0] and
+*                           subsequently it contains arrays containing the lists id and name at 
+*                           index[0] and index[1] respectively
+*/
 function getMemberLists($user_id) {
 
 require 'db_connect.php';
