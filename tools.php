@@ -311,6 +311,12 @@ mysqli_close($mysqli);
 
 }
 
+/**
+* A function that echos a table row-element for the given list and product in 
+* the current list being displayed
+* @param list_id int the database list_id of the given list
+* @param product_name string the name of the given product
+*/
 function buildRow($list_id, $product_name) {
 
 echo <<<EOF
@@ -326,10 +332,15 @@ echo <<<EOF
      </tr>
 EOF;
 
-//mysql_close();
-
 }
 
+/**
+* A function to check whether the given user has database registered ownership
+* of the given list
+* @param current_user string the database username of the user to check
+* @param list_id int the database list_id of the list to check
+* @return owner boolean returns true if the user has ownership of the list, false otherwise
+*/
 function checkListOwnership($current_user, $list_id) {
 require 'db_connect.php';
    if($mysqli->connect_error) {
@@ -358,6 +369,12 @@ mysqli_stmt_close($stmt);
 mysqli_close($mysqli);
 }
 
+/**
+* A function to delete the given users database-registered membership with the given list
+* from the database
+* @param current_user string the database username of the given user
+* @param listid int the database list_id of the given list
+*/
 function deleteListFromMembers($current_user, $listid) {
 require 'db_connect.php';
    if($mysqli->connect_error) {
@@ -378,6 +395,11 @@ mysqli_stmt_close($stmt);
 mysqli_close($mysqli);
 }
 
+/**
+* A function to delete the given users database-registered ownership with the given list
+* from the database
+* @param listid int the database list_id of the given list of which to delete ownership
+*/
 function deleteListFromOwners($listid) {
 
 require 'db_connect.php';
@@ -400,6 +422,10 @@ mysqli_close($mysqli);
 
 }
 
+/**
+* A function to delete a given list from the database lists table
+* @param listid int the database id of the list to delete from the database table
+*/
 function deleteListFromLists($listid) {
 
 require 'db_connect.php';
@@ -423,6 +449,11 @@ mysqli_close($mysqli);
 
 }
 
+/**
+* A function to get the database id for the given username
+* @param theGivenUsername string the username of the user of which to get the database id
+* @return result int the database id of the given username
+*/
 function getUserId($theGivenUsername) {
 
 require 'db_connect.php';
@@ -453,6 +484,11 @@ mysqli_close($mysqli);
    
 }
 
+/**
+* A function to check whether the given username exists in the database
+* @param username string the database username of the given user
+* @return boolean will return true if the given username exists in the database, false otherwise
+*/
 function userExistence($username) {
   require 'db_connect.php';
 
@@ -485,6 +521,11 @@ function userExistence($username) {
 
 }
 
+/**
+* A function to check whether the given email exists in the database
+* @param email string the database entry of the given email address
+* @return boolean will return true if the given email exists in the database, false otherwise
+*/
 function emailExistence($email) {
   require 'db_connect.php';
 
@@ -517,6 +558,11 @@ function emailExistence($email) {
 
 }
 
+/**
+* A function that echos an invitationFeedback div-element for each invitation waiting
+* for the given user
+* @param user_id int the database id of the given user of which to get the related invitations for
+*/
 function getInvitationLists($user_id) {
   require 'db_connect.php';
 
@@ -565,6 +611,11 @@ EOF;
 
 }  
 
+/**
+* A function to get the number of invites registered for the given user in the database
+* @param user_id int the database id of the given user
+* @return num_invites int the number of invites
+*/
 function getNumberOfInvites($user_id) {
   require 'db_connect.php';
 
