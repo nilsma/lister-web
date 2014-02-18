@@ -91,7 +91,7 @@ function updateOverviewLists(user_id) {
     }
 
     var params = "userid=".concat(user_id);
-    xmlhttp.open("POST", "update-overview-lists.php", true);
+    xmlhttp.open("POST", "resources/update-overview-lists.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send(params);
 }
@@ -117,7 +117,7 @@ function updateInvites() {
 	}
     }
     
-    xmlhttp.open("POST", "update-invites.php", true);
+    xmlhttp.open("POST", "resources/update-invites.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send(null);
 }
@@ -152,7 +152,7 @@ function updateInvitesNum(user_id) {
     }
 
     var params = "userid=".concat(user_id);
-    xmlhttp.open("POST", "update-invites-num.php", true);
+    xmlhttp.open("POST", "resources/update-invites-num.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send(params);
 }
@@ -191,7 +191,7 @@ function acceptInvite(elem) {
 	    }
 
 	    var params = "listid=".concat(listid);
-	    xmlhttp.open("POST", "accept-invite.php", true);
+	    xmlhttp.open("POST", "resource/accept-invite.php", true);
 	    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	    xmlhttp.send(params);
     } 
@@ -224,7 +224,7 @@ function removeInvite(elem) {
 	}
 	
 	var params = "listid=".concat(listid);
-	xmlhttp.open("POST", "remove-invite.php", true);
+	xmlhttp.open("POST", "resources/remove-invite.php", true);
 	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlhttp.send(params);
     }
@@ -238,7 +238,7 @@ function removeInvite(elem) {
 function getCurrentUserId() {
     var res;
     $.ajax({
-	url: 'member-information.php',
+	url: 'resources/member-information.php',
 	async: false,
 	success: function(data) {
 	    res=data.user_id;
@@ -255,7 +255,7 @@ function getCurrentUserId() {
 function getCurrentUserName() {
     var res;
     $.ajax({
-	url: 'member-information.php',
+	url: 'resources/member-information.php',
 	async: false,
 	success: function(data) {
 	    res=data.current_user;
@@ -300,7 +300,7 @@ function checkUserToInvite(current_user, invite_user, element) {
 function checkUserExistence(username) {
     var res;
     $.ajax({
-	url: 'user-existence.php',
+	url: 'resources/user-existence.php',
 	type: 'POST',
 	async: false,
 	data: { name: username },
@@ -355,7 +355,7 @@ function inviteMember(current_user, invite_user, list_id) {
 	    var param1 = "inv=".concat(invite_user);
 	    var param2 = "&i=".concat(list_id); 
 	    var params = param1.concat(param2);
-	    xmlhttp.open("POST", "invite-member.php", true);
+	    xmlhttp.open("POST", "resources/invite-member.php", true);
 	    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	    xmlhttp.send(params);
 	} else {
@@ -416,7 +416,7 @@ function removeItem(list_id, product_name) {
 	var param1 = "product=".concat(product); 
 	var param2 = "&list=".concat(list);
 	var params = param1.concat(param2);
-	xmlhttp.open("POST", "remove-item.php", true);
+	xmlhttp.open("POST", "resources/remove-item.php", true);
 	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlhttp.send(params);
     }
@@ -452,7 +452,7 @@ function addItem(product, list_number) {
 	var param1 = "item=".concat(item);
 	var param2 = "&list=".concat(list); 
 	var params = param1.concat(param2);
-	xmlhttp.open("POST", "add-item.php", true);
+	xmlhttp.open("POST", "resources/add-item.php", true);
 	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlhttp.send(params);
     } 
@@ -514,7 +514,7 @@ function updateTable() {
     }
     
     var params = "listid=".concat(list_id);
-    xmlhttp.open("POST", "update.php", true);
+    xmlhttp.open("POST", "resources/update.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send(params);
 }
@@ -557,7 +557,7 @@ function addList(itemarray) {
 	}
     
 	var params = "list=".concat(title);
-	xmlhttp.open("POST", "add-list.php", true);
+	xmlhttp.open("POST", "resources/add-list.php", true);
 	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlhttp.send(params);
     } else {
@@ -778,7 +778,7 @@ function deleteList(element) {
 	    var param1 = "listname=".concat(listtitle);
 	    var param2 = "&listid=".concat(listid)
 	    var params = param1.concat(param2);
-	    xmlhttp.open("POST", "remove-list.php", true);
+	    xmlhttp.open("POST", "resources/remove-list.php", true);
 	    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	    xmlhttp.send(params);
 	}
@@ -807,7 +807,7 @@ function logout() {
 	    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	}
 
-	xmlhttp.open("GET", "logout.php", false );
+	xmlhttp.open("GET", "lib/logout.php", false );
 	xmlhttp.send(null);
 	return xmlhttp.responseText;
     }
@@ -837,7 +837,7 @@ function getNewList(id) {
     }
     
     var params = "listid=".concat(list_id);
-    xmlhttp.open("POST", "update.php", true);
+    xmlhttp.open("POST", "resources/update.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send(params);
 }

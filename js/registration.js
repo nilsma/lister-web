@@ -170,7 +170,7 @@ function clearInputField(element) {
 function checkMailExistence(email) {
     var res;
     $.ajax({
-	url: 'check-mail.php',
+	url: 'resources/check-mail.php',
 	type: 'POST',
 	async: false,
 	data: { mail: email },
@@ -190,7 +190,7 @@ function checkMailExistence(email) {
 function checkUserExistence(username) {
     var res;
     $.ajax({
-	url: 'check-user.php',
+	url: 'resources/check-user.php',
 	type: 'POST',
 	async: false,
 	data: { name: username },

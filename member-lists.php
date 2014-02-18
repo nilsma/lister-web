@@ -1,12 +1,11 @@
 <?php
-require_once 'functions.php';
+require_once 'lib/functions.php';
 sec_session_start();
-
 if(!isset($_SESSION['logged_in'])) {
    header('Location: index.php');
 }
 
-require_once 'db_connect.php';
+require_once 'lib/db_connect.php';
 
 $current_user = $_SESSION['username'];
 $user_id = $_SESSION['user_id'];
@@ -24,27 +23,13 @@ echo <<<EOF
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0;"/>
-
     <link href="http://fonts.googleapis.com/css?family=Pompiere" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Advent+Pro:300" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="style/general.css">
     <link rel="stylesheet" href="style/member.css">
-
-<!--
-    <link rel="stylesheet" type="text/css" media="screen and (min-width: 320px) and (max-width: 480px) and (orientation: landscape)" href="style/iphone4-landscape.css">
-    <link rel="stylesheet" type="text/css" media="screen and (min-width: 320px) and (max-width: 568px) and (orientation: portrait)" href="style/iphone-portrait.css">
-    <link rel="stylesheet" type="text/css" media="screen and (min-width: 481px) and (max-width: 568px) and (orientation: landscape)" href="style/iphone-landscape.css">
--->
     <link rel="stylesheet" type="text/css" media="screen and (min-width: 320px) and (max-width: 339px) and (orientation: portrait)" href="style/iphone-portrait.css">
     <link rel="stylesheet" type="text/css" media="screen and (min-width: 340px) and (max-width: 567px) and (orientation: portrait)" href="style/sg-portrait.css">
     <link rel="stylesheet" type="text/css" media="screen and (min-width: 568px) and (max-width: 640px) and (orientation: landscape)" href="style/sg-landscape.css">
-<!--
-    <link rel="stylesheet" type="text/css" media="screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait)" href="style/ipad-portrait.css">
-    -->
-<!--
-    <link rel="stylesheet" type="text/css" media="screen and (min-width: 1025px)" href="style/large.css">
--->
-
     <script type="text/javascript" src="js/general.js"></script>
     <script type="text/javascript" src="js/jquery-2.0.2.js"></script>
   </head>
@@ -62,7 +47,7 @@ echo <<<EOF
 	    <div id="left_column">
 EOF;
 
-require_once 'menu.php';
+require_once 'parts/menu.php';
 
 echo <<<EOF
 	  
@@ -73,7 +58,7 @@ echo <<<EOF
 	      </section> <!-- end member_status -->
 EOF;
 
-require_once 'get-list.php';
+require_once 'resources/get-list.php';
 
 echo <<<EOF
 
