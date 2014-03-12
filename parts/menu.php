@@ -6,12 +6,12 @@ $num_inv = getInvQty($user_id, $mysqli);
 echo <<<EOF
 
      <section id="menu" class="general_panel">
-       <img id="close_menu" onclick="closeMenu()" src="media/close_window_w.png"></img>
+       <img id="close_menu" src="media/close_window_w.png"></img>
        <section class="list_header">
 	 <h3 class="list_name">Menu</h3>
        </section> <!-- end list_header -->
 
-       <h3 class="menu_entry" id="newList"><a onclick="toggleNewListSection()">New List</a></h3>
+       <h3 class="menu_entry" id="newList">New List</h3>
        <section id="newListSection">
 	 <h4>List name:</h4>
 	 <form name="addNewList" id="listtocreate" method="post" action="javascript:addList(this.addNewList)">
@@ -20,7 +20,7 @@ echo <<<EOF
 	 </form>
        </section> <!-- end newListSection -->
 
-       <h3 class="menu_entry" id="inviteMemberEntry"><a onclick="toggleInviteMemberSection()">Share List</a></h3>
+       <h3 class="menu_entry" id="inviteMemberEntry">Share List</h3>
        <section id="inviteMemberSection">
 	 <h4>Username:</h4>
 	 <form name="inviteMember" id="listtoinvite" method="post" action="javascript:initiateInvite(inviteMemberTextField)">
@@ -35,7 +35,7 @@ echo <<<EOF
 	 </form>
        </section> <!-- end end inviteMemberSection -->
 
-       <h3 class="menu_entry" id="invitations"><a onclick="toggleInvitationsSection()" id="invitesNum">$num_inv</a></h3>
+       <h3 class="menu_entry" id="invitations"><a id="invitesNum">$num_inv</a></h3>
        <section id="invitationsSection">
 EOF;
 getInvitationLists($user_id);
@@ -43,7 +43,7 @@ echo <<<EOF
 
        </section> <!-- end invitationsSection -->
        
-       <h3 class="menu_entry" id="logout"><a href="javascript:logout()">Logout</a></h3>
+       <h3 id="logout" class="menu_entry">Logout</h3>
      </section> <!-- end menu -->
 <!--     </div> -->	<!-- end left_column -->
 EOF;

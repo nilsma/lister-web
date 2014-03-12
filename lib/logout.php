@@ -10,5 +10,5 @@ setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"]
 // Destroy session
 session_destroy();
 unset($_SESSION['logged_in']);
-header('Location:../index.php');
+header('Location: ../index.php');
 ?>

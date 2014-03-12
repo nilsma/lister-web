@@ -13,6 +13,10 @@ section#menu h3 {
     float: left;
     }
 
+section#menu h3#logout:hover {
+    cursor: pointer;
+    }
+
 div#menu_panel {
     display: none;
     }
@@ -39,6 +43,12 @@ section#menu h3.menu_entry a {
     }
 
 section#menu h3.menu_entry a:hover {
+    background-color: #ffd373;
+    color: #04859d;
+    cursor: pointer;
+    }
+
+section#menu h3.menu_entry:hover {
     background-color: #ffd373;
     color: #04859d;
     cursor: pointer;

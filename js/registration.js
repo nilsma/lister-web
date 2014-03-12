@@ -38,12 +38,15 @@ function checkInputField(element) {
  * @param string - the username value to be checked before committing to the database
  */
 function checkRegistrationUser(username) {
-    if(!isBlank(username)) {
-	var element = document.getElementById('username');
-	var existence = checkUserExistence(username);
-	inputFeedback(element, existence, false);
+    var blank = isBlank(username);
+    var element = document.getElementById('username');
+    var existence;
+    if(blank) {
+	existence = false;
+	inputFeedback(element, existence, blank);
     } else {
-	inputFeedback(element, existence, true);
+	existence = checkUserExistence(username);
+	inputFeedback(element, existence, blank);
     }
 }
 
@@ -53,12 +56,15 @@ function checkRegistrationUser(username) {
  * @param email string - the email value to be checked before committing to the database
  */
 function checkRegistrationEmail(email) {
-    if(isBlank(email)) {
-	inputFeedback(element, existence, true);
+    var blank = isBlank(email);
+    if(blank) {
+	var element = document.getElementById('email');
+	var existence = false;
+	inputFeedback(element, existence, blank);
     } else {
 	var element = document.getElementById('email');
 	var existence = checkMailExistence(email);
-	inputFeedback(element, existence, false);
+	inputFeedback(element, existence, blank);
     }
 }
 
@@ -88,7 +94,9 @@ function inputFeedback(element, existence, blank) {
 	    setFormFeedbackVisibility(element, visibility);
 	}
     } else {
-	//do nothing
+	background = 'rgb(255,0,0)';
+	font = 'rgb(255,255,255)';
+	setFormElementColors(element, background, font);
     }
 }
 

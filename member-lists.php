@@ -30,8 +30,9 @@ echo <<<EOF
     <link rel="stylesheet" type="text/css" media="screen and (min-width: 320px) and (max-width: 339px) and (orientation: portrait)" href="style/iphone-portrait.css">
     <link rel="stylesheet" type="text/css" media="screen and (min-width: 340px) and (max-width: 567px) and (orientation: portrait)" href="style/sg-portrait.css">
     <link rel="stylesheet" type="text/css" media="screen and (min-width: 568px) and (max-width: 640px) and (orientation: landscape)" href="style/sg-landscape.css">
-    <script type="text/javascript" src="js/general.js"></script>
     <script type="text/javascript" src="js/jquery-2.0.2.js"></script>
+    <script type="text/javascript" src="js/general.js"></script>
+    <script type="text/javascript" src="js/listeners.js"></script>
   </head>
   <body id="member">
       <section id="header">
