@@ -18,7 +18,10 @@ if(!$stmt->prepare($query)) {
    $stmt->store_result();
    $row_count = $stmt->num_rows;
 
+   $_SESSION['listid'] = $list_id;
+
    if($row_count >= 1) {
+
    $row = $stmt->fetch();
 echo <<<EOF
 	  <section id="member_lists">

@@ -761,7 +761,7 @@ function deleteList(element) {
 	if(listtitle) {
 	    var result = null;
 	    var xmlhttp = null;
-
+	    
 	    if (window.XMLHttpRequest) {
 		xmlhttp=new XMLHttpRequest();
 	    } else {
@@ -780,6 +780,7 @@ function deleteList(element) {
 	    var params = param1.concat(param2);
 	    xmlhttp.open("POST", "resources/remove-list.php", true);
 	    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	    xmlhttp.send();
 	    xmlhttp.send(params);
 	}
     } 

@@ -77,6 +77,7 @@ echo <<<EOF
 EOF;
 if(checkListOwnership($current_user, $list_id)) {
 echo <<<EOF
+<!--	  <h3 class="remove_list" id="remove_list">delete</h3> -->
 		<h3 class="remove_list"><a onclick="javascript:deleteList(this)">delete</a></h3>
 	      </section> <!-- end list_header -->
 EOF;

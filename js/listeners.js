@@ -20,4 +20,12 @@ $(document).ready(function() {
     $('#logout').click(function() {
 	logout();
     });
+    //list
+    //delete list
+/*
+    $('#remove_list').click(function() {
+	alert(this);
+	deleteList(this);
+    });
+*/
 });
