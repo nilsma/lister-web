@@ -754,36 +754,28 @@ function verifyDeleteList() {
  *
  * @param element HTMLElement - the element which contains the list to delete
  */
-function deleteList(element) {
+function deleteList() {
     if(verifyDeleteList()) {
-	var listtitle = getListName(element);
-	var listid = getListId();
-	if(listtitle) {
-	    var result = null;
-	    var xmlhttp = null;
-	    
-	    if (window.XMLHttpRequest) {
-		xmlhttp=new XMLHttpRequest();
-	    } else {
-		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	    }
-
-	    xmlhttp.onreadystatechange=function() {
-		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-		    result = xmlhttp.responseText;
-		    location.reload(false);
-		}
-	    }
-	    
-	    var param1 = "listname=".concat(listtitle);
-	    var param2 = "&listid=".concat(listid)
-	    var params = param1.concat(param2);
-	    xmlhttp.open("POST", "resources/remove-list.php", true);
-	    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	    xmlhttp.send();
-	    xmlhttp.send(params);
+	var result = null;
+	var xmlhttp = null;
+	
+	if (window.XMLHttpRequest) {
+	    xmlhttp=new XMLHttpRequest();
+	} else {
+	    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	}
-    } 
+
+	xmlhttp.onreadystatechange=function() {
+	    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+//		result = xmlhttp.responseText;
+		location.reload(false);
+	    }
+	}
+	
+	xmlhttp.open("POST", "resources/remove-list.php", true);
+	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp.send();
+    }
 }
 
 /**

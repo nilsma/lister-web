@@ -2,7 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/lib/functions.php';
 sec_session_start();
 
-require_once 'functions.php';
+//require_once 'functions.php';
 sec_session_start();
 
 $current_user = $_SESSION['username'];

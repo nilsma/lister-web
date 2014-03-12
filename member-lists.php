@@ -41,8 +41,8 @@ echo <<<EOF
 	  <div id="outer_container">
 	    <div class="general_panel" id="menu_panel">
 	      <ul>
-		<li><h3 id="menu_button" class="menu_entry"><a href="#" onclick="openMenu()">Menu</a></h3></li>
-		<li><h3 id="lists_button" class="menu_entry"><a href="#" onclick="openLists()">Lists</a></h3></li>
+		<li><h3 id="menu_button" class="menu_entry">Menu</h3></li>
+		<li><h3 id="lists_button" class="menu_entry">Lists</h3></li>
 	      </ul>
 	    </div> <!-- end menu_panel -->
 	    <div id="left_column">
@@ -65,7 +65,6 @@ echo <<<EOF
 
 	  </div> <!-- end inner_container -->
 	    <div id="right_column">
-<!--	      <h3 id="lists_button" class="list_name"><a href="#" onclick="openLists()">Lists Button</a></h3> -->
 EOF;
 buildOverviewLists($user_id, $mysqli);
 echo <<<EOF

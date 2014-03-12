@@ -77,13 +77,14 @@ echo <<<EOF
 EOF;
 if(checkListOwnership($current_user, $list_id)) {
 echo <<<EOF
-<!--	  <h3 class="remove_list" id="remove_list">delete</h3> -->
-		<h3 class="remove_list"><a onclick="javascript:deleteList(this)">delete</a></h3>
+	  <h3 class="remove_list" id="remove_list">delete</h3>
+<!--		<h3 class="remove_list"><a onclick="javascript:deleteList(this)">delete</a></h3> -->
 	      </section> <!-- end list_header -->
 EOF;
 } else {
 echo <<<EOF
-		    <h3 class="remove_list"><a onclick="javascript:deleteList(this)">remove</a></h3>
+		    <h3 class="remove_list" id="remove_list">remove</h3>
+<!--		    <h3 class="remove_list"><a onclick="javascript:deleteList(this)">remove</a></h3> -->
 	      </section> <!-- end list_header -->
 EOF;
 }
@@ -176,7 +177,7 @@ $member_list_count = $member_lists[0];
 
 echo <<<EOF
 	  <section id="lists_overview" class="general_panel">
-	    <img id="close_lists" onclick="closeLists()" src="media/close_window_w.png"></img>
+	    <img id="close_lists" onclick="closeLists()" src="media/close_window_w.png"/>
 	    <section class="list_header">
 	      <h3 class="list_name">my lists</h3>
 	    </section> <!-- end list_header -->
@@ -586,7 +587,7 @@ echo <<<EOF
 	    <p>$inviter has invited you to the list:</p>
 	    <p>$list_name</p>
 	    <div id="list_id_$list_id" class="button_holder">
-	      <button class="accept_button add_button" onclick="javascript:acceptInvite(this)">Accept</button><button class="add_button" onclick="javascript:removeInvite(this)">Decline</button>
+	      <button class="accept_button add_button" id="accept_button">Accept</button><button id="decline_button" class="add_button">Decline</button>
 	    </div>
 	  </div>
 EOF;

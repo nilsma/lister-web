@@ -6,8 +6,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/lib/db_connect.php';
 $user_id = $_SESSION['user_id'];
 $list_id = $_POST['listid'];
 
-require 'db_connect.php';
-
    if($mysqli->connect_error) {
       die("$mysqli->connect_errno: $mysqli->connect_error");
    }
