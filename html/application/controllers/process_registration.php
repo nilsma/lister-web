@@ -5,13 +5,14 @@ require ROOT . BASE . LIBS . 'db_connect.php';
 require ROOT . BASE . LIBS . 'functions.php';
 
 $user = htmlspecialchars($_POST['username']);
+$email = htmlspecialchars($_POST['email']);
 $pwd1 = htmlspecialchars($_POST['password1']);
 $pwd2 = htmlspecialchars($_POST['password2']);
 
-if(!empty($user) && !empty($pwd1) && !empty($pwd2)) {
-  if(!checkUserExistence($mysqli, $user)) {
+if(!empty($user) && !empty($email) && !empty($pwd1) && !empty($pwd2)) {
+  if(!checkUserExistence($mysqli, $user, $email)) {
     if($pwd1 == $pwd2) {
-      addNewUser($mysqli, $user, $pwd1);
+      addNewUser($mysqli, $user, $email, $pwd1);
       unset($_SESSION['fail']);
       $_SESSION['failed_reg'] = False;
       $_SESSION['username'] = $user;

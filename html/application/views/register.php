@@ -36,7 +36,8 @@ $views_path = BASE . VIEWS;
     <form action="<?php echo $ctrl_path . 'process_registration.php'; ?>" method="POST">
       <fieldset>
 	<legend>Register form</legend><br/>
-      <label>Username:<br/></label><input class="itemtoadd" name="username" type="text" <?php if(isset($_SESSION['username']) && !empty($_SESSION['username'])) { echo 'value="' . $_SESSION['username']  . '"';} else {echo 'placeholder="Enter username ..."';}; ?> autofocus></input><br/><br/>
+      <label>Username:</label><br/><input class="itemtoadd" name="username" type="text" <?php if(isset($_SESSION['username']) && !empty($_SESSION['username'])) { echo 'value="' . $_SESSION['username']  . '"';} else {echo 'placeholder="Enter username ..."';}; ?> autofocus></input><br/><br/>
+      <label>Email:</label><br/><input class="itemtoadd" name="email" type="text" placeholder="Enter email ..."></input><br/><br/>
       <label>Password:<br/></label><input class="itemtoadd" name="password1" type="password" placeholder="Enter password ..."></input><br/><br/>
       <label>Re-type password:<br/></label><input class="itemtoadd" name="password2" type="password" placeholder="Re-enter password ..."></input><br/><br/>
       <p><input class="add_button" name="submit" type="submit" value="Register"></p>
