@@ -1,0 +1,35 @@
+<?php
+session_start();
+require $_SESSION['config'];
+?>
+<html>
+  <head>
+  </head>
+  <body>
+    <?php
+       if(isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] == 'http://127.0.1.1/' . BASE . 'register.php') {
+         $legend = 'Welcome Wanderer!';
+       } else {
+         if(isset($_SESSION['failed_auth'])) {
+           if($_SESSION['failed_auth'] == True) {
+             $legend = 'No Such Adventurer Here!';
+           } else {
+             $legend = 'Welcome Wanderer!';
+           }
+         } else {
+           $legend = 'Welcome Wanderer!';
+         }
+       }
+       ?>
+    <form action="<?php echo '/login/html/application/controllers/process_login.php'; ?>" method="POST">
+      <fieldset>
+	<legend><?php echo $legend ?></legend>
+	<br/>
+	<label>What the Gods Call You:<br/></label><input name="username" type="text" placeholder="Enter username ..." autofocus></input><br/><br/>
+	<label>Secret signal:<br/></label><input name="password" type="password" placeholder="Enter password ..."></input><br/>
+	<p><input name="submit" type="submit" value="Enter"></p>
+      </fieldset>
+    </form>
+    <p>Or <a href="<?php echo BASE . VIEWS . 'register.php'; ?>">Join Our Minions</a> Now!</p>
+  </body>
+</html>
