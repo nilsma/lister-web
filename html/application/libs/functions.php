@@ -1,36 +1,5 @@
 <?php
 /**
- *
- */
-function getUserId($mysqli, $username) {
-  // check connection
-  if (mysqli_connect_errno()) {
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
-  }
-
-  //define query
-  $query = "SELECT id FROM users WHERE username=? LIMIT 1";
- 
-  //initiatlize query
-  $stmt = $mysqli->stmt_init();
-
-  //prepare and execute query
-  if(!$stmt->prepare($query)) {
-    print("Failed to prepare statement! (getUserId)");
-  } else {
-    $stmt->bind_param('s',$username);
-    $stmt->execute();
-    $stmt->bind_result($user_id);
-    $stmt->fetch();
-        
-    return $user_id;
-  }
-  $stmt->close();
-  $mysqli->close();
-}
-
-/**
  * A function that takes a password and hashes it
  * @param string password - the given password to hash
  * @return string hashed - returns the hashed password

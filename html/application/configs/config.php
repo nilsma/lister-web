@@ -24,6 +24,7 @@ define('MODELS', 'application/models/');
 define('VIEWS', 'application/views/');
 define('CSS', 'public/css/');
 define('JS', 'public/js/');
+define('PICS', 'public/media/pics/');
 
 /**
  * Cookie configuration

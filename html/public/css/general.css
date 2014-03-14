@@ -1,0 +1,82 @@
+/* START GLOBAL */
+* {
+    margin: 0;
+    padding: 0;
+    }
+
+html {
+    overflow-y: scroll;
+    }
+/* END GLOBAL */
+
+/* START HEADER */
+body#registration section#header h1,
+body#index section#header h1,
+body#member section#header h1 {
+    text-decoration: none;
+    }
+
+section#header h1 {
+    font-family: 'Pompiere', cursive;
+    font-size: 2em;
+    margin: 0 auto;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    text-align: center;
+    text-decoration: underline;
+    width: 13.5em;
+    }
+
+.list_header {
+    height: 2em;
+    margin-bottom: 0.5em;
+    width: 100%;
+    }
+
+.list_name {
+    background-color: #ff8673;
+    float: left;
+    font-family: 'Advent Pro', sans-serif;
+    font-size: 1.3em;
+    height: 1.3em;
+    text-align: center;
+    text-transform: capitalize;
+    }
+/* END HEADER */
+
+/* START CONTAINERS */
+div#container {
+    }
+
+div#outer_container {
+    }
+
+div#inner_container {
+    background-color: #04859d;
+    margin: 0 auto;
+    width: 22.5em;
+    }
+
+.general_panel {
+    background-color: #04859d;
+    box-shadow: 3px 5px 9px #aaa;
+    color: #fff;
+    padding: 0.1em 1em 1em 1em;
+    }
+/* END CONTAINERS */
+
+/* START MEMBER STATUS */
+section#member_status {
+    text-align: right;
+    }
+
+section#member_status h2 {
+    font-family: sans-serif;
+    font-size: 0.8em;
+    font-weight: normal; //added
+    }
+
+section#member_status span#user {
+    font-style: italic;
+    }
+/* END MEMBER STATUS */

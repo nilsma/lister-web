@@ -1,0 +1,150 @@
+body#index input#login {
+    font-size: 0.9em;
+    max-width: 70px;
+    padding-left: 0;
+    padding-right: 0;
+    }
+
+body#index input#register {
+    font-size: 0.9em;
+    max-width: 80px;
+    padding-left: 0;
+    padding-right: 0;
+    }
+
+div#outer_container {
+    float: left;
+    width: 100%;
+    }
+
+div#left_column {
+    background-color: rgba(100,100,100, 0.8);
+    box-shadow: 2px -2px 7px #333;
+    display: none;
+    height: 100%;
+    top: -1em;
+//    width: 530px;
+    width: 100%;
+    }
+
+section#menu {
+    box-shadow: 2px 4px 9px #333;
+    box-shadow: 0 0 0;
+    margin: 0 auto;
+    margin-top: 2em;
+    }
+
+section#menu img#close_menu {
+    display: inline;
+    position: absolute;
+      top: 25px;
+      right: 214px;
+    width: 25px;
+    }
+
+section#menu img#close_menu:hover {
+    cursor: pointer;
+    }
+
+div#menu_panel {
+    display: block;
+    float: left;
+    height: 4.2em;
+    padding-left: 0;
+    position: static;
+    width: 4em;
+    }
+
+div#menu_panel h3.menu_entry {
+    background-color: #5fbdce;
+    float: none;
+    font-family: 'Advent Pro', sans-serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 0.1em;
+    text-align: center;
+    width: 3.4em;
+    }
+
+div#menu_panel a {
+    color: #ffffff;
+    display: block;
+    padding: 0.1em;
+    text-decoration: none;
+    }
+
+div#menu_panel h3.menu_entry a:hover {
+    background-color: #ffd373;
+    color: #04859d;
+    cursor: pointer;
+    }
+
+div#menu_panel ul {
+    list-style: none;
+    }
+
+div#menu_panel ul li {
+    float: left;
+    }
+
+div#menu_panel ul li:first-child {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    }
+
+div#left_column h3#menu_button {
+    display: block;
+    }
+
+section#menu {
+    display: none;
+    position: static;
+    }
+
+div#inner_container {
+    float: none;
+    }
+
+div#inner_container span#add_item_label {
+    display: none;
+    }
+
+div#inner_container input.itemtoadd {
+    width: 295px;
+    }
+
+div#inner_container input.add_button {
+    float: right;
+    font-size: 0.9em;
+    height: 27px;
+    min-width: 50px;
+    }
+
+div#right_column {
+    background-color: rgba(100,100,100, 0.8);
+    box-shadow: 2px -2px 5px #333;
+    display: none;
+    height: 100%;
+    top: -1em;
+    width: 100%;
+    }
+
+section#lists_overview {
+    box-shadow: 0 0 0;
+    display: none;
+    position: static;
+    margin: 0 auto;
+    margin-top: 2em;
+    }
+
+section#lists_overview img#close_lists {
+    display: inline;
+    position: absolute;
+      top: 25px;
+      right: 214px;
+    width: 25px;
+    }
+
+section#lists_overview img#close_lists:hover {
+    cursor: pointer;
+    }

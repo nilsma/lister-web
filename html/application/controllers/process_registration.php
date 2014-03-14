@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once $_SESSION['config'];
-require ROOT . BASE . LIBS . 'db_connect.php';
+require ROOT . BASE . LIBS . 'db-connect.php';
 require ROOT . BASE . LIBS . 'functions.php';
 
 $user = htmlspecialchars($_POST['username']);
@@ -16,7 +16,7 @@ if(!empty($user) && !empty($email) && !empty($pwd1) && !empty($pwd2)) {
       unset($_SESSION['fail']);
       $_SESSION['failed_reg'] = False;
       $_SESSION['username'] = $user;
-      header('Location: ' . BASE . VIEWS .  'member.php');
+      header('Location: ' . BASE . VIEWS .  'index.php');
     } else {
       $_SESSION['failed_reg'] = True;
       $_SESSION['fail'] = 'password mismatch';
