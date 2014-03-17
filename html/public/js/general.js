@@ -1,14 +1,3 @@
-function asdf() {
-    var string = 'Are you sure you want to invite to this list?';
-    var res = confirm('Really invite?');
-    if(!res) {
-	return false;
-    } else {
-	return true;
-    }
-}
-
-
 /**
  * A function to display the menu
  *
@@ -404,33 +393,25 @@ function confirmInvite(user) {
  * @param list_id int - the list id of the list to remove the item from
  * @param product_name string - the product name of the product to remove from the given list
  */
-function removeItem(list_id, product_name) {
-    var product = product_name;
-    var list = list_id;
-    if(product && list) {
-	var result = null;
-	var xmlhttp = null;
-
-	if (window.XMLHttpRequest) {
-	    xmlhttp=new XMLHttpRequest();
-	} else {
-	    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-
-	xmlhttp.onreadystatechange=function() {
-	    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-		result = xmlhttp.responseText;
-		updateTable();
-	    }
-	}
-
-	var param1 = "product=".concat(product); 
-	var param2 = "&list=".concat(list);
-	var params = param1.concat(param2);
-	xmlhttp.open("POST", "resources/remove-item.php", true);
-	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xmlhttp.send(params);
+function removeItem(item) {
+    var result = null;
+    var xmlhttp = null;
+    if (window.XMLHttpRequest) {
+	xmlhttp=new XMLHttpRequest();
+    } else {
+	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
     }
+
+    xmlhttp.onreadystatechange=function() {
+	if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+	    result = xmlhttp.responseText;
+	}
+    }
+
+    var params = "item=".concat(item);
+    xmlhttp.open("POST", "../../application/controllers/remove-item.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(params);
 }
 
 /**
@@ -439,34 +420,27 @@ function removeItem(list_id, product_name) {
  * @param product string - the product name of the product to add to the given list
  * @param list_number int - the list id of the list to add the given product to
  */
-function addItem(product, list_number) {
-    var item = product.value;
-    var list_id = document.getElementsByClassName('shopping_list')[0].id.substring(8);
-    if(item) {
-	var result = null;
-	var xmlhttp = null;
-	var list = list_id;
-	if (window.XMLHttpRequest) {
-	    xmlhttp=new XMLHttpRequest();
-	} else {
-	    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	}
+function addItem(element) {
+    var item = element.add_item_form.itemtoadd.value;
+    var result = null;
+    var xmlhttp = null;
+    if (window.XMLHttpRequest) {
+	xmlhttp=new XMLHttpRequest();
+    } else {
+	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
 
-	xmlhttp.onreadystatechange=function() {
-	    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-		result = xmlhttp.responseText;
-		resetInputField(product);
-		updateTable();
-	    }
+    xmlhttp.onreadystatechange=function() {
+	if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+	    result = xmlhttp.responseText;
+	    window.location(false);
 	}
+    }
     
-	var param1 = "item=".concat(item);
-	var param2 = "&list=".concat(list); 
-	var params = param1.concat(param2);
-	xmlhttp.open("POST", "resources/add-item.php", true);
-	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xmlhttp.send(params);
-    } 
+    var params = "item=".concat(item);
+    xmlhttp.open("POST", "../../application/controllers/add-item.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(params);
 }
 
 /**
@@ -765,35 +739,29 @@ function verifyDeleteList() {
  *
  * @param element HTMLElement - the element which contains the list to delete
  */
-function deleteList(element) {
+function deleteList() {
+    var el = document.getElementById('current_list');
     if(verifyDeleteList()) {
-	var listtitle = getListName(element);
-	var listid = getListId();
-	if(listtitle) {
-	    var result = null;
-	    var xmlhttp = null;
+	var result = null;
+	var xmlhttp = null;
 	    
-	    if (window.XMLHttpRequest) {
-		xmlhttp=new XMLHttpRequest();
-	    } else {
-		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	    }
-
-	    xmlhttp.onreadystatechange=function() {
-		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-		    result = xmlhttp.responseText;
-		    location.reload(false);
-		}
-	    }
-	    
-	    var param1 = "listname=".concat(listtitle);
-	    var param2 = "&listid=".concat(listid)
-	    var params = param1.concat(param2);
-	    xmlhttp.open("POST", "resources/remove-list.php", true);
-	    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	    xmlhttp.send();
-	    xmlhttp.send(params);
+	if (window.XMLHttpRequest) {
+	    xmlhttp=new XMLHttpRequest();
+	} else {
+	    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	}
+	
+	xmlhttp.onreadystatechange=function() {
+	    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+		result = xmlhttp.responseText;
+		location.reload(false);
+	    }
+	}
+	    
+	var params = "title=".concat(el.innerHTML);
+	xmlhttp.open("POST", "../../application/controllers/delete-list.php", true);
+	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp.send(params);
     } 
 }
 
@@ -812,7 +780,7 @@ function confirmLogout() {
  */
 function logout() {
     if(confirmLogout()) {
-	window.location = "../controllers/process_logout.php";
+	window.location = "../controllers/process-logout.php";
     }
 }
 

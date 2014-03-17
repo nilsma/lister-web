@@ -27,6 +27,7 @@ $user_lists = $_SESSION['user_lists'];
 
 $cur_title = key($user_lists);
 $cur_id = $user_lists[$cur_title];
+$_SESSION['cur_id'] = $cur_id;
 
 $myInvites = getInvites($mysqli, $user_id);
 $num_inv = count($myInvites);

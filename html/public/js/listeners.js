@@ -31,18 +31,25 @@ $(document).ready(function() {
     $('#invitations').click(function() {
 	toggleInvitationsSection();
     }),
-    //accept button on invite
-    $('#accept_btn').click(function() {
-	acceptInvite(this);
-    }),
-    //decline button on invite
-    $('#decline_btn').click(function() {
-	removeInvite(this);
-    }),
     /**
      * listeners for logout section
      */
     $('#logout').click(function() {
 	logout();
+    }),
+    $('#delete_button').click(function() {
+	deleteList();
+    }),
+    /**
+     * listeners for list
+     */
+    $('#remove_item').click(function() {
+	removeItem();
     });
+    //add item to list
+/*
+    $('#add_item').click(function() {
+	addItem();
+    }),
+*/
 });

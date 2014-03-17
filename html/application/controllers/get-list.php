@@ -24,9 +24,9 @@ EOF;
 
 echo <<<EOF
           </table>
-           <form class="add_item" name="add_item" method="post" action="">
+           <form class="add_item" name="add_item_form" method="post" action="javascript:addItem(this)">
               <span id="add_item_label"><normal>Add item: </normal></span>
-              <input name="itemtoadd" type="text" class="itemtoadd"  />
+              <input id="itemtoadd" name="itemtoadd" type="text" class="itemtoadd"  />
               <input id="add_item" type="submit" name="additem" class="add_button" value="Add" />
             </form>
           </section> <!-- end shopping_list -->

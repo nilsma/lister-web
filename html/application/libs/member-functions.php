@@ -282,9 +282,8 @@ echo <<<EOF
           <tr>
             <td>$product</td>
             <td>
-              <form name="remove_item" method="post" class="remove_item" action="javascript:removeItem(this)">
-                <input type="hidden" name="itemtoremove" value="$product"/>
-                <input type="submit" class="remove_button" name="removeitem" value="remove" />
+              <form name="remove_item" method="post" class="remove_item" action="javascript:removeItem('$product')"/>
+                <input type="submit" class="remove_button" name="removeitem" value="remove"/>
               </form>
             </td>
           </tr>

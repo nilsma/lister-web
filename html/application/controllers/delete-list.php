@@ -20,15 +20,22 @@ if(checkOwnership($mysqli, $user_id, $del_list_id)) {
   try {
     $mysqli->autocommit(FALSE);
 
-    $query = "DELETE FROM owners WHERE user_id='$user_id' AND list_id='$del_list_id'";
-
+    $query = "DELETE FROM products WHERE list_id='$del_list_id'";
     $result = $mysqli->query($query);
     if(!$result) {
       $result->free();
       throw new Exception($mysqli->error);
     }
 
-    $query = "DELETE FROM products WHERE list_id='$del_list_id'";
+    $query = "DELETE FROM invites WHERE list_id='$del_list_id'";
+    $result = $mysqli->query($query);
+    if(!$result) {
+      $result->free();
+      throw new Exception($mysqli->error);
+    }
+
+    $query = "DELETE FROM owners WHERE user_id='$user_id' AND list_id='$del_list_id'";
+
     $result = $mysqli->query($query);
     if(!$result) {
       $result->free();
