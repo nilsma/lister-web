@@ -32,4 +32,10 @@ define('PICS', 'public/media/pics/');
 //set cookie runtime to 1209600 seconds = 2 weeks
 define('COOKIE_RUNTIME', 1209600);
 define('COOKIE_DOMAIN', '.127.0.1.1');
+
+/**
+ *
+ */
+define('CHARSET', 'UTF-8');
+define('REPLACE_FLAGS', ENT_COMPAT | 'UTF-8');
 ?>

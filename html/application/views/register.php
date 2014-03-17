@@ -33,7 +33,7 @@ $views_path = BASE . VIEWS;
 	 }
        }
        ?>
-    <form action="<?php echo $ctrl_path . 'process_registration.php'; ?>" method="POST">
+    <form action="<?php echo $ctrl_path . 'process-registration.php'; ?>" method="POST">
       <fieldset>
 	<legend>Register form</legend><br/>
       <label>Username:</label><br/><input class="itemtoadd" name="username" type="text" <?php if(isset($_SESSION['username']) && !empty($_SESSION['username'])) { echo 'value="' . $_SESSION['username']  . '"';} else {echo 'placeholder="Enter username ..."';}; ?> autofocus></input><br/><br/>

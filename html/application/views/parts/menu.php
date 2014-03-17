@@ -12,18 +12,18 @@ echo <<<EOF
        <h3 class="menu_entry" id="newList">New List</h3>
        <section id="newListSection">
          <h4>List name:</h4>
-	 <form name="addNewList" id="listtocreate" method="post" action="{$ctrls_path}addNewList.php">
-           <input id="newListTextField" class="cleanInput menu_input itemtoadd" type="text" name="listTitle">
-           <input type="submit" class="add_button" value="Create">
+	 <form name="addNewList" method="post" action="{$mods_path}add-new-list.php">
+           <input class="menu_input itemtoadd" type="text" name="title">
+           <input id="addNewList" type="submit" class="add_button" value="Create">
          </form>
        </section> <!-- end newListSection -->
 
        <h3 class="menu_entry" id="inviteMemberEntry">Share List</h3>
        <section id="inviteMemberSection">
 	<h4>Username:</h4>
-         <form name="inviteMember" id="listtoinvite" method="post" onsubmit="return confirm('Confirm invite')" action="{$ctrls_path}addInvite.php">
-	   <input id="inviteMemberTextField" class="cleanInput menu_input itemtoadd" type="text" name="memberToInvite">
-           <select name="listChooser" class="itemtoadd" id="dropdown_menu">
+         <form name="inviteMember" method="post" onsubmit="return confirm('Confirm invite')" action="{$mods_path}add-invite.php">
+	   <input class="cleanInput menu_input itemtoadd" type="text" name="receiver">
+           <select name="title" class="itemtoadd" id="dropdown_menu">
 
 EOF;
 
@@ -40,7 +40,7 @@ echo <<<EOF
 
 EOF;
 
-invDisplay($myInvites);
+invDisplay($myInvites, $mods_path);
 
 echo <<<EOF
        </section> <!-- end invitationsSection -->

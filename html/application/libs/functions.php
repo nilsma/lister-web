@@ -1,4 +1,19 @@
 <?php
+/****************************************************************
+ * A file holding the functions generally used by the application
+ * @author Nils Martinussen
+ ****************************************************************/
+
+/**
+ * A function to handle replacing of parameters for the htmlspecialchars function.
+ * Credits to Mike Robinson [http://php.net/htmlspecialchars]
+ * @param string $string - the string to wash
+ * @return string $washed - the washed string
+ */
+function html($string) {
+  return htmlspecialchars($string, REPLACE_FLAGS, CHARSET);
+}
+
 /**
  * A function that takes a password and hashes it
  * @param string password - the given password to hash
@@ -21,22 +36,17 @@ function hashPassword($password) {
  */
 function addNewUser($mysqli, $username, $email, $password) {
   
-  //hash the password
   $hashed = hashPassword($password);
 
-  //check connection
   if(mysqli_connect_errno()) {
     printf("Connection failed: %s\n", mysqli_connect_error());
     exit();
   }
 
-  //define query
   $query = "INSERT INTO users VALUES(NULL, ?, ?, ?)";
 
-  //initialize query
   $stmt = $mysqli->stmt_init();
 
-  //prepare and execute the query
   if(!$stmt->prepare($query)) {
     printf("Failed to prepare statement! (addNewUser)");
   } else {
@@ -68,24 +78,22 @@ function checkUserExistence($mysqli, $user, $email) {
  * @return boolean - returns true if the given username exists, false otherwise
  */
 function usernameExists($mysqli, $username) {
-  // check connection
+
   if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
   }
 
-  //define query
   $query = "SELECT username FROM users WHERE username=? LIMIT 1";
  
-  //initiatlize query
   $stmt = $mysqli->stmt_init();
 
-  //prepare and execute query
   if(!$stmt->prepare($query)) {
-    print("Failed to prepare statement! (usernameExists)");
+    print("Failed to prepare statement in usernameExists() ...");
   } else {
     $stmt->bind_param('s',$username);
     $stmt->execute();
+    $stmt->store_result();
     $num_rows = $stmt->num_rows;
     if($num_rows >= 1) {
       return True;
@@ -104,19 +112,16 @@ function usernameExists($mysqli, $username) {
  * @return boolean - returns true if the given username exists, false otherwise
  */
 function emailExists($mysqli, $email) {
-  // check connection
+
   if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
   }
 
-  //define query
   $query = "SELECT username FROM users WHERE email=? LIMIT 1";
  
-  //initiatlize query
   $stmt = $mysqli->stmt_init();
 
-  //prepare and execute query
   if(!$stmt->prepare($query)) {
     print("Failed to prepare statement! (emailExists)");
   } else {
@@ -143,19 +148,16 @@ function emailExists($mysqli, $email) {
  *                   that password matches the password found in the database, false otherwise
  */
 function checkLogin($mysqli, $username, $password) {
-  // check connection
+
   if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
   }
 
-  //define query
   $query = "SELECT password FROM users WHERE username=? LIMIT 1";
  
-  //initiatlize query
   $stmt = $mysqli->stmt_init();
 
-  //prepare and execute query
   if(!$stmt->prepare($query)) {
     print("Failed to prepare statement! (checkLogin)");
   } else {

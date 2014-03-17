@@ -31,7 +31,7 @@ $views_path = BASE . VIEWS;
 	<h1>Lister</h1>
       </section> <!-- end #header -->
       <section id="inner_container">
-	<form action="<?php echo $ctrls_path . 'process_login.php' ?>"  method="post" name="login_form"><br/>
+	<form action="<?php echo $ctrls_path . 'process-login.php' ?>"  method="post" name="login_form"><br/>
 	  <fieldset>
 	    <legend>Login form</legend>
 	    <label id="login_username">Username: </label><br/><input class="itemtoadd" type="text" name="username" /><br/><br/>
