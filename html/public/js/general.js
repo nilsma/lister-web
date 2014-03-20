@@ -71,6 +71,7 @@ function closeLists() {
  * 
  * @param user_id int - the integer of the given users id
  */
+/*
 function updateOverviewLists(user_id) {
     var topList = getListOnTop();
     var result = null;
@@ -95,6 +96,7 @@ function updateOverviewLists(user_id) {
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send(params);
 }
+*/
 
 /**
  * A function to update the invitations for the currently logged in users invites section
@@ -387,81 +389,17 @@ function confirmInvite(user) {
     var string = 'Are you sure you want to invite '.concat(user).concat('?').concat('\n').concat(user).concat(' will be able to add and remove items from your list.');
     return confirm(string);
 }
-/**
- * A function to remove an item from a list
- *
- * @param list_id int - the list id of the list to remove the item from
- * @param product_name string - the product name of the product to remove from the given list
- */
-function removeItem(item) {
-    var result = null;
-    var xmlhttp = null;
-    if (window.XMLHttpRequest) {
-	xmlhttp=new XMLHttpRequest();
-    } else {
-	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-
-    xmlhttp.onreadystatechange=function() {
-	if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-	    result = xmlhttp.responseText;
-	}
-    }
-
-    var params = "item=".concat(item);
-    xmlhttp.open("POST", "../../application/controllers/remove-item.php", true);
-    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send(params);
-}
-
-/**
- * A function to add an item to a given list
- *
- * @param product string - the product name of the product to add to the given list
- * @param list_number int - the list id of the list to add the given product to
- */
-function addItem(element) {
-    var item = element.add_item_form.itemtoadd.value;
-    var result = null;
-    var xmlhttp = null;
-    if (window.XMLHttpRequest) {
-	xmlhttp=new XMLHttpRequest();
-    } else {
-	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-
-    xmlhttp.onreadystatechange=function() {
-	if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-	    result = xmlhttp.responseText;
-	    window.location(false);
-	}
-    }
-    
-    var params = "item=".concat(item);
-    xmlhttp.open("POST", "../../application/controllers/add-item.php", true);
-    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send(params);
-}
 
 /**
  * A function to run the updateTable() function periodically (every 10 seconds)
  */
+/*
 setInterval(
     function updateTables() {
 	updateTable();
     }, 10000
 );
-
-/**
- * A function to get the list name of the currently displayed list
- *
- * @return list_name string - the name of the list currently displayed
- */
-function getCurrentListName() {
-    var element = document.getElementById('current_list');
-    var list_name = element.innerText || element.textContent
-    return list_name;
-}
+*/
 
 /**
  * A function to get the list id of the currently displayed list
@@ -474,34 +412,6 @@ function getCurrentListId() {
     var list_id_base = element.id;
     var list_id = list_id_base.substring(8);
     return list_id;
-}
-
-/**
- * A function to update the table containing the products in the currently displayed list
- */
-function updateTable() {
-    var list_name = getCurrentListName();
-    var list_id = getCurrentListId();
-    var xmlhttp = null;
-    var result = null;
-    var element = document.getElementsByClassName('shopping_table')[0];
-    if (window.XMLHttpRequest) {
-	xmlhttp=new XMLHttpRequest();
-    } else {
-	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    
-    xmlhttp.onreadystatechange=function() {
-	if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-	    result = xmlhttp.responseText;
-	    addResult(element,result);
-	}
-    }
-    
-    var params = "listid=".concat(list_id);
-    xmlhttp.open("POST", "resources/update.php", true);
-    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send(params);
 }
 
 /**
@@ -688,16 +598,6 @@ function showInvitationsSection() {
 }
 
 /**
- * A function to check whether a given string is blank or not
- *
- * @param str string - the string to check
- * @return boolean - returns true if the string is empty, false otherwise
- */
-function isBlank(str) {
-    return (!str || /^\s*$/.test(str));
-}
-
-/**
  * A function to get the list name of the given HTML element
  * 
  * @param element HTMLElement - the HTML element which contains the list
@@ -740,7 +640,7 @@ function verifyDeleteList() {
  * @param element HTMLElement - the element which contains the list to delete
  */
 function deleteList() {
-    var el = document.getElementById('current_list');
+    var element = document.getElementById('current_list');
     if(verifyDeleteList()) {
 	var result = null;
 	var xmlhttp = null;
@@ -758,7 +658,7 @@ function deleteList() {
 	    }
 	}
 	    
-	var params = "title=".concat(el.innerHTML);
+	var params = "title=".concat(element.innerHTML);
 	xmlhttp.open("POST", "../../application/controllers/delete-list.php", true);
 	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlhttp.send(params);
@@ -858,6 +758,7 @@ function getCurrentListElement() {
  * @param element object - the li element from the overview lists section for the chosen list to focus
  */
 function focusList(element) {
+    alert(element.textContent);
     setListOverviewStyle(getCurrentListElement());
     setListOverviewStyle(element);
     var list_id = element.id.substring(8);
@@ -917,14 +818,340 @@ function setListOverviewStyle(element) {
     }
 }
 
+/*************************************************************************/
+
+/**
+ * A function to check whether a given string is blank or not
+ *
+ * @param str string - the string to check
+ * @return boolean - returns true if the string is empty, false otherwise
+ */
+function isBlank(str) {
+    return (!str || /^\s*$/.test(str));
+}
+
+/**
+ * A function to set innerHTML of a given element
+ */
+function setInnerHTML(element, html) {
+    element.innerHTML=html;
+}
+
+/**
+ * A function to swap the currently displayed html in the main view area
+ * with the html of the given new list to be displayed
+ */
+function updateCurListView(new_list) {
+    var table = document.getElementById('products_table');
+    var header = document.getElementById('current_list');
+    setInnerHTML(header, new_list);
+    getTableHTML(new_list, function(html) {
+	setInnerHTML(table, html);
+    });
+}
+
+/**
+ * A function to get the title of the currently displayed list
+ */
+function getCurList(new_list, callback) {
+    var result = null;
+    var xmlhttp = null;
+    if (window.XMLHttpRequest) {
+	xmlhttp=new XMLHttpRequest();
+    } else {
+	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange=function() {
+	if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+	    result = xmlhttp.responseText;
+	    callback(result);
+	}
+    }
+
+    var params = "new_list=".concat(new_list);
+    xmlhttp.open("POST", "../../application/controllers/get-current-list.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(params);
+}
+
+/**
+ * A function to get the element of the list with the given title from the list overview section
+ */
+function getListElement(title) {
+    var lists = document.getElementsByClassName('user_list_overview');
+    var el;
+    for(var i = 0; i < lists.length; i++) {
+	if(lists[i].innerHTML == title) {
+	    el = lists[i];
+	}
+    }
+    return el;
+}
+
+/**
+ * A function to displayed the chosen list in the application main window
+ * @param element object - the li element from the overview lists section for the chosen list to focus
+ */
+function changeList(element) {
+    var cur_title;
+    var cur_elem;
+    var new_list = element.innerHTML;
+    getCurList(new_list, function(result) {
+	cur_title = result;	
+	cur_elem = getListElement(cur_title);
+	setListOverviewStyle(cur_elem);
+    });
+    setListOverviewStyle(element);
+    updateCurListView(new_list);
+}
+
+/**
+ * A function to get the innerHTML of a given list
+ * @param string title - the title of the list to get the innerHTML
+ */
+function getTableHTML(title, callback) {
+    var result = null;
+    var xmlhttp = null;
+    if (window.XMLHttpRequest) {
+	xmlhttp=new XMLHttpRequest();
+    } else {
+	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange=function() {
+	if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+	    result = xmlhttp.responseText;
+	    callback(result);
+	}
+    }
+
+    var params = "title=".concat(title);
+    xmlhttp.open("POST", "../../application/controllers/fetch-table-rows.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(params);
+}
+
+/**
+ * A function to remove an item from the currently displayed list
+ * @param string item - the item to be removed from the list
+ */
+function popItem(item, callback) {
+    var result = null;
+    var xmlhttp = null;
+    if (window.XMLHttpRequest) {
+	xmlhttp=new XMLHttpRequest();
+    } else {
+	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange=function() {
+	if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+	    result = xmlhttp.responseText;
+	    callback();
+	}
+    }
+
+    var params = "item=".concat(item);
+    xmlhttp.open("POST", "../../application/controllers/remove-item.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(params);
+}
+
+/**
+ * A function to update the table containing the products in the currently displayed list
+ */
+function updateTable(callback) {
+    var xmlhttp = null;
+    var result = null;
+    if (window.XMLHttpRequest) {
+	xmlhttp=new XMLHttpRequest();
+    } else {
+	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    xmlhttp.onreadystatechange=function() {
+	if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+	    result = xmlhttp.responseText;
+	    callback(result);
+	}
+    }
+    
+    xmlhttp.open("POST", "../../application/controllers/fetch-table-rows.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send();
+}
+
+/**
+ * A function to remove an item from the currently displayed list
+ */
+function removeItem(item) {
+    var table = document.getElementById('products_table');
+    popItem(item, function() {
+	updateTable(function(html) {
+	    setInnerHTML(table, html);
+	});
+    });
+}
+
+/**
+ * A function to add an elements value as an item to the currently displayed list
+ */
+function addItem(element) {
+    var table = document.getElementById('products_table');
+    var item = element.value;
+
+    pushItem(item, function() {
+	updateTable(function(html) {
+	    setInnerHTML(table, html);
+	    resetInputField(element);
+	});
+    });
+}
+
+/**
+ * A function to add an item to the currently displayed list
+ * @param string item - the item to be added to the list
+ */
+function pushItem(item, callback) {
+    var result = null;
+    var xmlhttp = null;
+    if (window.XMLHttpRequest) {
+	xmlhttp=new XMLHttpRequest();
+    } else {
+	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange=function() {
+	if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+	    result = xmlhttp.responseText;
+	    callback();
+	}
+    }
+    
+    var params = "item=".concat(item);
+    xmlhttp.open("POST", "../../application/controllers/add-item.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(params);
+}
+
+/**
+ * A function to handle an invite in the application 
+ * @param HTMLElement form - the HTML form for accepting and declining an invite
+ */
+function handleInvite(form, acceptance) {
+    var result = null;
+    var xmlhttp = null;
+    var sender = form.sender.value;
+    var title = form.list.value;
+    var acceptance = acceptance;
+
+    if (window.XMLHttpRequest) {
+	xmlhttp=new XMLHttpRequest();
+    } else {
+	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange=function() {
+	if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+	    result = xmlhttp.responseText;
+	    location.reload(false);
+	    //TODO remove accepted or declined invite
+	    //TODO update number of invites
+	    //TODO add feedback on success
+	    //TODO add feedback on error
+	}
+    }
+
+    var param1 = "sender=".concat(sender);
+    var param2 = "&title=".concat(title); 
+    var param3 = "&acceptance=".concat(acceptance);
+    var params = param1.concat(param2).concat(param3);
+    xmlhttp.open("POST", "../../application/controllers/handle-invite.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(params);
+}
+
+/**
+ * A function to add a new invite to the application database
+ * @param form HTMLElement - the HTML form for adding invites
+ */
+function addInvite(form) {
+    var result = null;
+    var xmlhttp = null;
+    var receiver = form.receiver.value;
+    var title = form.title.value;
+    var inputField = form.receiver;
+    //TODO add check for receiver existence
+
+    if(confirmInvite(receiver)) {
+	if (window.XMLHttpRequest) {
+	    xmlhttp=new XMLHttpRequest();
+	} else {
+	    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+	xmlhttp.onreadystatechange=function() {
+	    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+		result = xmlhttp.responseText;
+		resetInputField(inputField);
+		//TODO add feedback on success
+		//TODO add feedback on error
+	    }
+	}
+
+	var param1 = "receiver=".concat(receiver);
+	var param2 = "&title=".concat(title); 
+	var params = param1.concat(param2);
+	xmlhttp.open("POST", "../../application/controllers/add-invite.php", true);
+	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp.send(params);
+    }
+}
+
+/**
+ * A function to add a new list to the application database
+ * @param element string - the title of the new list
+ */
+function addNewList(form) {
+    var result = null;
+    var xmlhttp = null;
+    var title = form.title.value;
+    var inputField = form.title;
+    if(!isBlank(title)) {
+
+	if (window.XMLHttpRequest) {
+	    xmlhttp=new XMLHttpRequest();
+	} else {
+	    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+	xmlhttp.onreadystatechange=function() {
+	    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+		result = xmlhttp.responseText;
+		resetInputField(inputField);
+		location.reload();
+		//TODO update lists overview
+		//TODO add feedback on success
+		//TODO add feedback on error
+	    }
+	}
+
+	var params = "title=".concat(title);
+	xmlhttp.open("POST", "../../application/controllers/add-new-list.php", true);
+	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp.send(params);
+    }
+}
+
 /**
  * A function to run on window load, which sets the highlight of some particular
  * elements of the page
  */
 window.onload = function initiate() {
-    var nodelist = document.getElementsByClassName("list_container");
-    var node = nodelist[0]; 
+//    var nodelist = document.getElementsByClassName("list_container");
+//    var node = nodelist[0]; 
     var topList = getListOnTop();
     setListOverviewStyle(topList);
-    updateTables();
+//    updateTables();
 }

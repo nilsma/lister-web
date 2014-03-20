@@ -38,5 +38,4 @@ if(checkOwnership($mysqli, $user_id, $list_id)) {
 
 }
 
-
 ?>

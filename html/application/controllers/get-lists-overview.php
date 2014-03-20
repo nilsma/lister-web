@@ -14,7 +14,7 @@ if(count($user_lists) >= 1) {
     buildList($title);
   }
 } else {
-echo 'nachos';
+  echo '<p class="user_lists_overview">You havent made any lists yet</p>';
 }
 echo <<<EOF
            </ul> <!-- end lists -->                                                                                                   

@@ -4,6 +4,19 @@
  * @author Nils Martinussen
  ********************************************************************/
 
+function mergeLists($owner, $member) {
+  $merged = array();
+  foreach($owner as $k => $v) {
+    $merged[$k] = $v;
+  }
+
+  foreach($member as $k => $v) {
+    $merged[$k] = $v;
+  }
+
+  return $merged;
+}
+
 /**
  * A function to check whether a given user id is the owner of a list
  * @param mysqli_object mysqli - the object for database the connection as defined in db-connect.php
@@ -266,7 +279,7 @@ function titleExists($mysqli, $user_id, $title) {
 function buildList($title) {
 echo <<<EOF
 
-    <li class="user_list_overview">$title</li>
+    <li class="user_list_overview" onClick="changeList(this)">$title</li>
 EOF;
 }
 
@@ -341,12 +354,15 @@ function invDisplay($user_lists, $path) {
 
 echo <<<EOF
 	     <div class="invitationFeedback">
-	       <form method="POST" action="{$path}handle-invite.php" name="handle_invite" class="remove_item">
+	       <form class="remove_item" name="accept_invite_form" method="POST" action="javascript:handleInvite(this.accept_invite_form, true)">
 		 <p>$sender has invited you to the list:</p>
 		 <p>$list</p>
 		 <input type="hidden" name="sender" value="{$sender}"/>
 		 <input type="hidden" name="list" value="{$list}"/>
-		 <input type="submit" class="add_button" value="Accept" name="accept" /><input type="submit" class="add_button" value="Decline" name="decline" />
+		 <input type="submit" class="add_button accept_button" value="Accept" name="accept_button" />
+	       </form>
+	       <form class="remove_item" name="decline_invite_form" method="POST" action="javascript:handleInvite(this.accept_invite_form, false)">
+		 <input type="submit" class="add_button" value="Decline" name="decline" />
 	       </form>
 	     </div>
 
@@ -443,6 +459,42 @@ function getLists($mysqli, $user_id) {
     }
     
     return $user_lists;
+  }
+  $stmt->close();
+  $mysqli->close();
+}
+
+/**
+ * A function to get the lists that the given user_id is a member
+ * @param mysqli $mysqli - the mysqli connection object to the database
+ * @param string user_id - the user_id of the user of which to get the lists
+ * @return array $member_lists - an associative array holding the lists of which the given user, assoc id=>title
+ */
+function getMemberLists($mysqli, $user_id) {
+
+  if (mysqli_connect_errno()) {
+    printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
+  }
+
+  $query = mysqli_real_escape_string($mysqli, "SELECT l.id, l.title FROM lists as l, members as m, users as u WHERE l.id=m.list_id AND m.user_id=u.id AND u.id=?");
+
+  $stmt = $mysqli->stmt_init();
+
+  if(!$stmt->prepare($query)) {
+    print("Failed to prepare statement in getLists() ...");
+  } else {
+    $stmt->bind_param('i',$user_id);
+    $stmt->execute();
+    $stmt->bind_result($id, $title);
+
+    $member_lists = array();
+
+    while($result = $stmt->fetch()) {
+      $member_lists[$title] = $id;
+    }
+    
+    return $member_lists;
   }
   $stmt->close();
   $mysqli->close();

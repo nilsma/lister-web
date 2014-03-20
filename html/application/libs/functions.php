@@ -5,6 +5,45 @@
  ****************************************************************/
 
 /**
+ * A function to add an initial list to a new users account
+ * @param mysqli mysqli - a mysqli object for database connection
+ * @param int user_id - the user_id of which to add the initial list
+ */
+function addInitialList($mysqli, $user_id) {
+  $title = html('my list');
+  
+  try {
+    $mysqli->autocommit(FALSE);
+
+    $query = "INSERT INTO lists VALUES(NULL, '$title')";
+
+    $result = $mysqli->query($query);
+    if(!$result) {
+      $result->free();
+      throw new Exception($mysqli->error);
+    }
+
+    $last_id = $mysqli->insert_id;
+
+    $query = "INSERT INTO owners VALUES(NULL, '$user_id', '$last_id')";
+    $result = $mysqli->query($query);
+    if(!$result) {
+      $result->free();
+      throw new Exception($mysqli->error);
+    }
+
+    $mysqli->commit();
+    $mysqli->autocommit(TRUE);
+
+  }
+
+  catch(Exception $e) {
+    $mysqli->rollback();
+    $mysqli->autocommit(TRUE);
+  }
+}
+
+/**
  * A function to handle replacing of parameters for the htmlspecialchars function.
  * Credits to Mike Robinson [http://php.net/htmlspecialchars]
  * @param string $string - the string to wash
