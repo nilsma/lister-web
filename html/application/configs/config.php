@@ -10,13 +10,13 @@ ini_set('display_errors', 1);
 /**
  * Application base URL
  */
-define('URL', 'http://127.0.1.1/login/html/');
+//define('URL', 'http://127.0.1.1/login/html/');
 
 /**
  * Folder paths
  */
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);
-define('BASE', '/lister-web/html/');
+define('BASE', '/');
 define('CONFIGS', 'application/configs/');
 define('CONTROLLERS', 'application/controllers/');
 define('LIBS', 'application/libs/');
