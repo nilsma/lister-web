@@ -1,0 +1,11 @@
+div#right_column {
+    height: 20em;
+    position: absolute;
+      top: 0;
+      right: 0;
+    width: 11.5em;
+    }
+
+section#lists_overview {
+    position: fixed;
+    }

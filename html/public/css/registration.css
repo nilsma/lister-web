@@ -1,0 +1,84 @@
+body#registration p#login_email,
+body#registration p#login_username,
+body#registration p#login_password,
+body#registration p#login_repeat_password {
+    font-family: sans-serif;
+    }
+
+body#registration section#inner_container {
+    height: 12.5em;
+    }
+
+section#inner_container {
+    border-top: 1px dashed black;
+    margin: 0 auto;
+    width: 22.5em;
+    }
+
+form {
+    text-align: center;
+    }
+
+p#login_email {
+    margin-top: 2em;
+    }
+
+p#login_username,
+p#login_password,
+p#login_repeat_password {
+    margin-top: 0.5em;
+    }
+
+p#login_email,
+p#login_username,
+p#login_password,
+p#login_repeat_password {
+    margin-bottom: 0.5em;
+    }
+
+p#checked-email,
+p#checked-username {
+    color: red;
+    visibility: hidden;
+    font-family: sans-serif;
+    font-size: 0.8em;
+    margin-top: 0.2em;
+    }
+
+input.itemtoadd {
+    background-color: white;
+    border: 1px solid orange;
+    box-shadow: inset 1px 1px 2px #888;
+    font-family: sans-serif;
+    padding: 0.2em;
+    width: 13em;
+    }
+
+input#myusername {
+    margin-bottom: 1em;
+    }
+
+.add_button {
+    background-color: #04859d;
+    background-color: #5fbdce;
+    border: 1px solid #57D6C7;
+    border: #ffd373;
+    color: #ffffff;
+    font-size: 1em;
+    padding: 0.2em;
+    }
+
+.add_button:hover {
+    background-color: #ffd373;
+    color: #04859d;
+    cursor: pointer;
+    }
+
+input#register {
+    float: left;
+    margin-left: 7em;
+    }
+
+button#back {
+    margin-left: 1.5em;
+    }

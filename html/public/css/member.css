@@ -1,0 +1,399 @@
+/* START MENU */
+section#menu {
+    padding-top: 1em;
+    width: 9.5em;
+    }
+
+section#menu img#close_menu {
+    display: none;
+    }
+
+section#menu h3 {
+    clear: both;
+    float: left;
+    }
+
+section#menu h3#logout:hover {
+    cursor: pointer;
+    }
+
+div#menu_panel {
+    display: none;
+    }
+
+section#menu h3.list_name:hover {
+    cursor: default;
+    }
+
+section#menu h3.menu_entry {
+    background-color: #5fbdce;
+    float: none;
+    font-family: 'Advent Pro', sans-serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 0.3em;
+    text-align: center;
+    }
+
+section#menu h3.menu_entry a {
+    color: #ffffff;
+    display: block;
+    padding: 0.1em;
+    text-decoration: none;
+    }
+
+section#menu h3.menu_entry a:hover {
+    background-color: #ffd373;
+    color: #04859d;
+    cursor: pointer;
+    }
+
+section#menu h3.menu_entry:hover {
+    background-color: #ffd373;
+    color: #04859d;
+    cursor: pointer;
+    }
+
+section#menu form#listtocreate input,
+section#menu form#listtoinvite input {
+    margin-bottom: 0.5em;
+    }
+
+section#menu .menu_input {
+    width: 96%;
+    }
+
+section#menu input.add_button {
+    margin-bottom: 1em;
+    margin-left: 2.5em;
+    width: 50%;
+    }
+
+section#newListSection {
+    display: none;
+    }
+
+#menu h4 {
+    font-family: sans-serif;
+    font-weight: normal;
+    text-align: center;
+    }
+
+section#inviteMemberSection {
+    display: none;
+    }
+
+.cleanInput {
+    background-color: #ffffff;
+    }
+
+.uncleanInput {
+    background-color: #ff4746;
+    }
+
+section#menu select#dropdown_menu {
+    background-color: white;
+    margin-bottom: 0.5em;
+    width: 100%;
+    }
+
+section#invitationsSection {
+    display: none;
+    }
+
+div.invitationFeedback {
+    border-bottom: 1px dashed black;
+    margin-bottom: 0.5em;
+    padding: 0.2em 0.1em 0em 0.1em;
+    }
+
+section#invitationsSection div:last-child {
+    border: none;
+    }
+
+div.invitationFeedback p {
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 0.9em;
+    margin-bottom: 0.2em;
+    text-align: center;
+    }
+
+div.invitationFeedback p:nth-child(2) {
+    background-color: #0C505D;
+    width: 100%;
+    }
+
+section#invitationsSection p.empty_invites {
+    width: 100%;
+    }
+
+div.invitationFeedback div.button_holder {
+    margin: 0 auto;
+    width: 7.6em;
+    }
+
+div.invitationFeedback div.button_holder button {
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    font-size: 0.9em;
+    }
+
+div.invitationFeedback button.accept_button  {
+    margin-right: 2px;
+    }
+
+h3.invitations {
+    float: left;
+    }
+/* END MENU */
+
+/* START INPUT */
+input.remove_button {
+    background-color: #04859d;
+    border: 1px solid #57D6C7;
+    border: #ffd373;
+    color: #ffffff;
+    font-size: 0.92em;
+    padding: 0.1em 0.2em 0.1em 0.2em;
+    }
+
+input.remove_button:hover {
+    background-color: #ffd373;
+    color: #04859d;
+    cursor: pointer;
+    }
+
+form.add_item {
+    font-family: sans-serif;
+    }
+
+.itemtoadd {
+    background-color: white;
+    border: 1px solid orange;
+    box-shadow: inset 1px 1px 2px #888;
+    font-family: sans-serif;
+    padding: 0.2em;
+    width: 13em;
+    }
+
+.add_button {
+    background-color: #04859d;
+    background-color: #5fbdce;
+    border: 1px solid #57D6C7;
+    border: #ffd373;
+    color: #ffffff;
+    font-size: 1em;
+    padding: 0.2em;
+    }
+
+.add_button:hover {
+    background-color: #ffd373;
+    color: #04859d;
+    cursor: pointer;
+    }
+/* END INPUT */
+
+/* START TABLE */
+table {
+    background-color: #5fbdce;
+    border: 1px solid black;
+    border: 1px solid white;
+    margin-bottom: 2em;
+    width: 100%;
+    float: left;
+    }
+
+table td {
+    border-bottom: 1px dashed black;
+    border-bottom: 1px dashed lightgrey;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 1em;
+    max-width: 17em;
+    padding: 0.1em 0.2em 0.1em 0.2em;
+    word-break: normal;
+    }
+
+table td:nth-child(2) {
+    text-align: right;
+    }
+/* END TABLE */
+
+/* START SHOPPING LIST */
+section.shopping_list {
+    margin-bottom: 1.5em;
+    }
+
+section.shopping_list p {
+    font-family: sans-serif;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    text-align: center;
+    }
+
+section.list_header h3.toggle {
+    background-color: #ff8673;
+    float: right;
+    font-family: 'Advent Pro', sans-serif;
+    font-size: 1.3em;
+    font-weight: normal;
+    text-align: center;
+    }
+
+section.list_header a.toggle {
+    color: #fff;
+    display: block;
+    height: 1.3em;
+    outline: none;
+    text-decoration: none;
+    width: 1.5em;
+    }
+
+section.list_header a.toggle:hover {
+    background-color: #ffd373;
+    color: #04859d;
+    cursor: pointer;
+    }
+
+section.list_header a.toggle:link,
+section.list_header a.toggle:visited {
+    outline: none;
+    }
+
+section.list_header a.toggle:active {
+    background-color: #000;
+    color: #fff;
+    outline: none;
+    }
+
+div#outer_container section.list_header h3.list_name,
+div#outer_container section.list_header h3.list_name {
+    width: 100%;
+    }
+
+div#inner_container section.list_header h3.list_name {
+    width: 14em;
+    width: 13.5em;
+    }
+
+section.list_header h3.list_name:hover {
+    cursor: default;
+    }
+
+section.list_header h3.list_name:active {
+    cursor: default;
+    }
+
+div#inner_container section.list_header h3.remove_list {
+    background-color: #ff8673;
+    float: right;
+    font-family: 'Advent Pro', sans-serif;
+    font-size: 1.3em;
+    font-weight: normal;
+    height: 1.3em;
+    margin-left: 0.2em;
+    text-align: center;
+    width: 3.5em;
+    }
+
+div#inner_container section.list_header h3.remove_list:hover {
+    background-color: #ffd373;
+    color: #04859d;
+    cursor: pointer;
+    }
+
+div#inner_container section.list_header h3.remove_list a {
+    display: block;
+    }
+/* END SHOPPING LIST */
+
+/* START LISTS OVERVIEW */
+
+section#lists_overview {
+    padding-top: 1em;
+    width: 9.5em;
+    }
+
+section#lists_overview img#close_lists {
+    display: none;
+    }
+
+ul#lists {
+    font-family: 'Advent Pro', sans-serif;
+    font-size: 1.2em;
+    list-style: none;
+    }
+
+ul#lists li {
+    background-color: #5fbdce;
+    font-weight: bold;
+    margin-bottom: 0.3em;
+    padding: 0.1em;
+    text-align: center;
+    }
+
+ul#lists li:hover {
+    background-color: #ffd373;
+    color: #04859d;
+    cursor: pointer;
+    }
+
+ul#lists li.overview_close {
+    background-color: #5fbdce;
+    color: #ffffff;
+    }
+
+ul#lists li.overview_open {
+    background-color: #ffffff;
+    color: #5fbdce;
+    }
+
+ul#lists .user_list_overview {
+    text-transform: capitalize;
+    }
+
+ul#empty_list li.empty_user_list_overview {
+    list-style: none;
+    }
+
+/* END LISTS OVERVIEW */
+
+div#outer_container {
+    margin: 0 auto;
+    position: relative;
+    width: 50em;
+    }
+
+div#left_column {
+    height: 20em;
+    position: absolute;
+      top: 0;
+      left: 0;
+    width: 11.5em;
+    }
+
+div#left_column a#menu_button {
+    display: none;
+    }
+
+section#menu {
+    position: fixed;
+    }
+
+div#inner_container {
+    margin: 0 auto;
+    width: 22.5em;
+    }
+
+div#right_column {
+    height: 20em;
+    position: absolute;
+      top: 0;
+      right: 0;
+    width: 11.5em;
+    }
+
+section#lists_overview {
+    position: fixed;
+    }
