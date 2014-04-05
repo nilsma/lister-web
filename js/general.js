@@ -464,7 +464,7 @@ function addItem(product, list_number) {
 setInterval(
     function updateTables() {
 	updateTable();
-    }, 10000
+    }, 100000
 );
 
 /**
