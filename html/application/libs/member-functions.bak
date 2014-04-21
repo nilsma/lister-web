@@ -30,7 +30,7 @@ function checkOwnership($mysqli, $user_id, $list_id) {
     exit();
   }
 
-  $query = "SELECT o.user_id FROM lists as l, owners as o, users as u WHERE u.id=? AND u.id=o.user_id AND o.list_id=l.id AND l.id=?";
+  $query = "SELECT COUNT(*) FROM lists as l, owners as o, users as u WHERE u.id=? AND u.id=o.user_id AND o.list_id=l.id AND l.id=?";
  
   $stmt = $mysqli->stmt_init();
 
@@ -39,49 +39,13 @@ function checkOwnership($mysqli, $user_id, $list_id) {
   } else {
     $stmt->bind_param('ii',$user_id, $list_id);
     $stmt->execute();
-    $stmt->bind_result($num);
-    $stmt->fetch();
-    if($num > 0) {
+    $stmt->store_result();
+    $num_rows = $stmt->num_rows;
+    if($num_rows >= 1) {
       return True;
     } else {
       return False;
     }
-
-  }
-  $stmt->close();
-  $mysqli->close();
-}
-
-/**
- * A function to check whether a given user id is the owner of a list
- * @param mysqli_object mysqli - the object for database the connection as defined in db-connect.php
- * @param int user_id - the user id of the user 
- * @param int list_id - the list id of the list
- */
-function checkMembership($mysqli, $user_id, $list_id) {
-
-  if (mysqli_connect_errno()) {
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
-  }
-
-  $query = "SELECT m.user_id FROM lists as l, members as m, users as u WHERE u.id=? AND u.id=m.user_id AND m.list_id=l.id AND l.id=?";
- 
-  $stmt = $mysqli->stmt_init();
-
-  if(!$stmt->prepare($query)) {
-    print("Failed to prepare statement in checkOwnership() ...");
-  } else {
-    $stmt->bind_param('ii',$user_id, $list_id);
-    $stmt->execute();
-    $stmt->bind_result($num);
-    $stmt->fetch();
-    if($num > 0) {
-      return True;
-    } else {
-      return False;
-    }
-
   }
   $stmt->close();
   $mysqli->close();
@@ -150,7 +114,7 @@ function addListMember($mysqli, $user_id, $list_id) {
  * @param int owner - the user_id of the owner of the list
  * @return int list_id - the list id of the corresponding list
  */
-function getOwnerListId($mysqli, $user_id, $title) {
+function getListId($mysqli, $title, $owner) {
   if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
@@ -163,39 +127,7 @@ function getOwnerListId($mysqli, $user_id, $title) {
   if(!$stmt->prepare($query)) {
     print("Failed to prepare statement in getListId() ...");
   } else {
-    $stmt->bind_param('si',$title, $user_id);
-    $stmt->execute();
-    $stmt->bind_result($id);
-    $stmt->fetch();
-
-    return $id;
-
-  }
-  $stmt->close();
-  $mysqli->close();
-}
-
-/**
- * A function to get the list id of the given list title belonging to the given owners user_id
- * @param mysqli_object mysqli - the object for database the connection as defined in db-connect.php
- * @param string title - the title of the list of which to get the id
- * @param int owner - the user_id of the owner of the list
- * @return int list_id - the list id of the corresponding list
- */
-function getMemberListId($mysqli, $user_id, $title) {
-  if (mysqli_connect_errno()) {
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
-  }
-
-  $query = "SELECT l.id FROM lists as l, members as m, users as u WHERE title=? AND l.id=m.list_id AND m.user_id=u.id AND u.id=?";
- 
-  $stmt = $mysqli->stmt_init();
-
-  if(!$stmt->prepare($query)) {
-    print("Failed to prepare statement in getListId() ...");
-  } else {
-    $stmt->bind_param('si',$title, $user_id);
+    $stmt->bind_param('si',$title, $owner);
     $stmt->execute();
     $stmt->bind_result($id);
     $stmt->fetch();
@@ -344,19 +276,7 @@ function titleExists($mysqli, $user_id, $title) {
  * members lists and echos back that HTML
  * @param string title - the title of the list
  */
-function buildOwnerList($title) {
-echo <<<EOF
-
-    <li class="user_list_overview" onClick="changeList(this)">$title</li>
-EOF;
-}
-
-/**
- * A function to build a li item to for the ul holding a 
- * members lists and echos back that HTML
- * @param string title - the title of the list
- */
-function buildMemberList($title) {
+function buildList($title) {
 echo <<<EOF
 
     <li class="user_list_overview" onClick="changeList(this)">$title</li>
@@ -427,30 +347,26 @@ function getProducts($mysqli, $cur_id) {
  * @param string path - base path for the models folder, according to the config file for the application
  */
 function invDisplay($user_lists, $path) {
-  $accept_path = $path . 'accept-invite.php';
-  $decline_path = $path . 'remove-invite.php';
   $num = count($user_lists);
 
   if($num >= 1) {
-    foreach($user_lists as $sender => $title) {
+    foreach($user_lists as $sender => $list) {
 
 echo <<<EOF
 	     <div class="invitationFeedback">
-	       <form class="remove_item" name="accept_invite_form" method="POST" action="{$accept_path}">
+	       <form class="remove_item" name="accept_invite_form" method="POST" action="javascript:handleInvite(this.accept_invite_form, true)">
 		 <p>$sender has invited you to the list:</p>
-		 <p>$title</p>
+		 <p>$list</p>
 		 <input type="hidden" name="sender" value="{$sender}"/>
-		 <input type="hidden" name="title" value="{$title}"/>
+		 <input type="hidden" name="list" value="{$list}"/>
 		 <input type="submit" class="add_button accept_button" value="Accept" name="accept_button" />
 	       </form>
-	       <form class="remove_item" name="decline_invite_form" method="POST" action="{$decline_path}">
-		 <input type="hidden" name="sender" value="{$sender}"/>
-		 <input type="hidden" name="title" value="{$title}"/>
-		 <input type="submit" class="add_button" value="Decline" name="decline"/>	 
+	       <form class="remove_item" name="decline_invite_form" method="POST" action="javascript:handleInvite(this.accept_invite_form, false)">
+		 <input type="submit" class="add_button" value="Decline" name="decline" />
 	       </form>
-	     </div> <!-- end .invitationFeedback -->
-EOF;
+	     </div>
 
+EOF;
     }
   } else {
 
@@ -518,7 +434,7 @@ function getInvites($mysqli, $user_id) {
  * @param string user_id - the user_id of the user of which to get the lists
  * @return array $user_lists - an associative array holding the lists of which the given user, assoc id=>title
  */
-function getOwnerLists($mysqli, $user_id) {
+function getLists($mysqli, $user_id) {
 
   if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());

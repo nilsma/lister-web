@@ -310,22 +310,34 @@ div#inner_container section.list_header h3.remove_list a {
 
 /* START LISTS OVERVIEW */
 
-section#lists_overview {
+section#lists_owner_overview {
     padding-top: 1em;
     width: 9.5em;
     }
 
-section#lists_overview img#close_lists {
+section#lists_owner_overview img#close_lists {
     display: none;
     }
 
-ul#lists {
+section#lists_member_overview {
+    margin-top: 1em;
+    padding-top: 1em;
+    width: 9.5em;
+    }
+
+section#lists_member_overview img#close_lists {
+    display: none;
+    }
+
+ul#owner_lists,
+ul#member_lists {
     font-family: 'Advent Pro', sans-serif;
     font-size: 1.2em;
     list-style: none;
     }
 
-ul#lists li {
+ul#owner_lists li,
+ul#member_lists li {
     background-color: #5fbdce;
     font-weight: bold;
     margin-bottom: 0.3em;
@@ -333,23 +345,27 @@ ul#lists li {
     text-align: center;
     }
 
-ul#lists li:hover {
+ul#owner_lists li:hover,
+ul#member_lists li:hover {
     background-color: #ffd373;
     color: #04859d;
     cursor: pointer;
     }
 
-ul#lists li.overview_close {
+ul#owner_lists li.overview_close,
+ul#member_lists li.overview_close {
     background-color: #5fbdce;
     color: #ffffff;
     }
 
-ul#lists li.overview_open {
+ul#owner_lists li.overview_open,
+ul#member_lists li.overview_open {
     background-color: #ffffff;
     color: #5fbdce;
     }
 
-ul#lists .user_list_overview {
+ul#owner_lists .user_list_overview,
+ul#member_lists .user_list_overview {
     text-transform: capitalize;
     }
 

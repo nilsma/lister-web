@@ -53,41 +53,6 @@ function checkOwnership($mysqli, $user_id, $list_id) {
 }
 
 /**
- * A function to check whether a given user id is the owner of a list
- * @param mysqli_object mysqli - the object for database the connection as defined in db-connect.php
- * @param int user_id - the user id of the user 
- * @param int list_id - the list id of the list
- */
-function checkMembership($mysqli, $user_id, $list_id) {
-
-  if (mysqli_connect_errno()) {
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
-  }
-
-  $query = "SELECT m.user_id FROM lists as l, members as m, users as u WHERE u.id=? AND u.id=m.user_id AND m.list_id=l.id AND l.id=?";
- 
-  $stmt = $mysqli->stmt_init();
-
-  if(!$stmt->prepare($query)) {
-    print("Failed to prepare statement in checkOwnership() ...");
-  } else {
-    $stmt->bind_param('ii',$user_id, $list_id);
-    $stmt->execute();
-    $stmt->bind_result($num);
-    $stmt->fetch();
-    if($num > 0) {
-      return True;
-    } else {
-      return False;
-    }
-
-  }
-  $stmt->close();
-  $mysqli->close();
-}
-
-/**
  * A function to remove an invite from the database
  * @param mysqli_object mysqli - the object for database the connection as defined in db-connect.php
  * @param int user_id - the user id of the user to add as member
@@ -157,38 +122,6 @@ function getOwnerListId($mysqli, $user_id, $title) {
   }
 
   $query = "SELECT l.id FROM lists as l, owners as o, users as u WHERE title=? AND l.id=o.list_id AND o.user_id=u.id AND u.id=?";
- 
-  $stmt = $mysqli->stmt_init();
-
-  if(!$stmt->prepare($query)) {
-    print("Failed to prepare statement in getListId() ...");
-  } else {
-    $stmt->bind_param('si',$title, $user_id);
-    $stmt->execute();
-    $stmt->bind_result($id);
-    $stmt->fetch();
-
-    return $id;
-
-  }
-  $stmt->close();
-  $mysqli->close();
-}
-
-/**
- * A function to get the list id of the given list title belonging to the given owners user_id
- * @param mysqli_object mysqli - the object for database the connection as defined in db-connect.php
- * @param string title - the title of the list of which to get the id
- * @param int owner - the user_id of the owner of the list
- * @return int list_id - the list id of the corresponding list
- */
-function getMemberListId($mysqli, $user_id, $title) {
-  if (mysqli_connect_errno()) {
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
-  }
-
-  $query = "SELECT l.id FROM lists as l, members as m, users as u WHERE title=? AND l.id=m.list_id AND m.user_id=u.id AND u.id=?";
  
   $stmt = $mysqli->stmt_init();
 
@@ -344,19 +277,7 @@ function titleExists($mysqli, $user_id, $title) {
  * members lists and echos back that HTML
  * @param string title - the title of the list
  */
-function buildOwnerList($title) {
-echo <<<EOF
-
-    <li class="user_list_overview" onClick="changeList(this)">$title</li>
-EOF;
-}
-
-/**
- * A function to build a li item to for the ul holding a 
- * members lists and echos back that HTML
- * @param string title - the title of the list
- */
-function buildMemberList($title) {
+function buildList($title) {
 echo <<<EOF
 
     <li class="user_list_overview" onClick="changeList(this)">$title</li>
@@ -382,6 +303,8 @@ echo <<<EOF
           </tr>
 EOF;
 }
+
+
 
 /**
  * A function to get all the products from a given list id (cur_id) and puts them in an assoc

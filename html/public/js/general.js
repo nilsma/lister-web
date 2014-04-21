@@ -639,8 +639,9 @@ function verifyDeleteList() {
  *
  * @param element HTMLElement - the element which contains the list to delete
  */
-function deleteList() {
+function deleteOwnerList() {
     var element = document.getElementById('current_list');
+    var title = element.innerHTML;
     if(verifyDeleteList()) {
 	var result = null;
 	var xmlhttp = null;
@@ -658,8 +659,40 @@ function deleteList() {
 	    }
 	}
 	    
-	var params = "title=".concat(element.innerHTML);
-	xmlhttp.open("POST", "../../application/controllers/delete-list.php", true);
+	var params = "title=".concat(title);
+	xmlhttp.open("POST", "../../application/controllers/delete-owner-list.php", true);
+	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp.send(params);
+    } 
+}
+
+/**
+ * A function to delete a list from the application database
+ *
+ * @param element HTMLElement - the element which contains the list to delete
+ */
+function deleteMemberList() {
+    var element = document.getElementById('current_list');
+    var title = element.innerHTML;
+    if(verifyDeleteList()) {
+	var result = null;
+	var xmlhttp = null;
+	    
+	if (window.XMLHttpRequest) {
+	    xmlhttp=new XMLHttpRequest();
+	} else {
+	    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp.onreadystatechange=function() {
+	    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+		result = xmlhttp.responseText;
+		location.reload(false);
+	    }
+	}
+	    
+	var params = "title=".concat(title);
+	xmlhttp.open("POST", "../../application/controllers/delete-member-list.php", true);
 	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlhttp.send(params);
     } 
@@ -776,7 +809,7 @@ function focusList(element) {
 function getListOnTop() {
     var element;
     jQuery(document).ready(function() {
-	element = jQuery('#lists li').first();
+	element = jQuery('#owner_lists li').first();
     });
     return element;
 }
@@ -878,7 +911,7 @@ function getCurList(new_list, callback) {
 /**
  * A function to get the element of the list with the given title from the list overview section
  */
-function getListElement(title) {
+function getListElement(title, callback) {
     var lists = document.getElementsByClassName('user_list_overview');
     var el;
     for(var i = 0; i < lists.length; i++) {
@@ -886,11 +919,11 @@ function getListElement(title) {
 	    el = lists[i];
 	}
     }
-    return el;
+    callback(el);
 }
 
 /**
- * A function to displayed the chosen list in the application main window
+ * A function to display the chosen list in the application main window
  * @param element object - the li element from the overview lists section for the chosen list to focus
  */
 function changeList(element) {
@@ -899,11 +932,13 @@ function changeList(element) {
     var new_list = element.innerHTML;
     getCurList(new_list, function(result) {
 	cur_title = result;	
-	cur_elem = getListElement(cur_title);
-	setListOverviewStyle(cur_elem);
+	getListElement(cur_title, function(el) {
+	    cur_elem = el;
+	    setListOverviewStyle(cur_elem);
+	    setListOverviewStyle(element);
+	    updateCurListView(new_list);
+	});
     });
-    setListOverviewStyle(element);
-    updateCurListView(new_list);
 }
 
 /**
@@ -1038,7 +1073,9 @@ function pushItem(item, callback) {
 /**
  * A function to handle an invite in the application 
  * @param HTMLElement form - the HTML form for accepting and declining an invite
+ * @param boolean acceptance - true if the invite has been accepted, false if the invite has been declined
  */
+/*
 function handleInvite(form, acceptance) {
     var result = null;
     var xmlhttp = null;
@@ -1071,6 +1108,7 @@ function handleInvite(form, acceptance) {
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send(params);
 }
+*/
 
 /**
  * A function to add a new invite to the application database

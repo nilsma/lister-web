@@ -16,8 +16,8 @@ $item = html(trim($_POST['item']));
 $user_id = $_SESSION['user_id'];
 $list_id = $_SESSION['cur_id'];
 
-
-if(checkOwnership($mysqli, $user_id, $list_id)) {
+//TODO add owner/membership check
+//if(checkOwnership($mysqli, $user_id, $list_id) || checkMembership($mysqli, $user_id, $list_id)) {
   if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
@@ -36,6 +36,6 @@ if(checkOwnership($mysqli, $user_id, $list_id)) {
   $stmt->close();
   $mysqli->close();
 
-}
+//}
 
 ?>

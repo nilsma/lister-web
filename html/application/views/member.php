@@ -21,26 +21,52 @@ $username = $_SESSION['username'];
 $_SESSION['user_id'] = getUserId($mysqli, $username);
 $user_id = $_SESSION['user_id'];
 
-$_SESSION['owner_lists'] = getLists($mysqli, $_SESSION['user_id']);
+$_SESSION['owner_lists'] = getOwnerLists($mysqli, $_SESSION['user_id']);
 $_SESSION['member_lists'] = getMemberLists($mysqli, $_SESSION['user_id']);
 
 $owner_lists = $_SESSION['owner_lists'];
 $member_lists = $_SESSION['member_lists'];
 
-$user_lists = mergeLists($owner_lists, $member_lists);
+//handle owner_lists
+if(count($owner_lists) >= 1) {
+  ksort($owner_lists);
+}
 
+$_SESSION['owner_lists'] = $owner_lists;
+if(count($owner_lists) >= 1) {
+  $cur_title = key($owner_lists);
+  $cur_id = $owner_lists[$cur_title];
+  $_SESSION['cur_title'] = $cur_title;
+  $_SESSION['cur_id'] = $cur_id;
+}
+
+//handle member_lists
+if(count($member_lists) >= 1) {
+  ksort($member_lists);
+}
+
+$_SESSION['member_lists'] = $member_lists;
+//if(count($member_lists) >= 1) {
+//  $cur_title = key($member_lists);
+//  $cur_id = $member_lists[$cur_title];
+//  $_SESSION['cur_title'] = $cur_title;
+//  $_SESSION['cur_id'] = $cur_id;
+//}
+
+//handle user_lists 
+
+$user_lists = mergeLists($owner_lists, $member_lists);
 if(count($user_lists) >= 1) {
   ksort($user_lists);
 }
 
 $_SESSION['user_lists'] = $user_lists;
-
-if(count($user_lists) >= 1) {
-  $cur_title = key($user_lists);
-  $cur_id = $user_lists[$cur_title];
-  $_SESSION['cur_title'] = $cur_title;
-  $_SESSION['cur_id'] = $cur_id;
-}
+//if(count($user_lists) >= 1) {
+//  $cur_title = key($user_lists);
+//  $cur_id = $user_lists[$cur_title];
+//  $_SESSION['cur_title'] = $cur_title;
+//  $_SESSION['cur_id'] = $cur_id;
+//}
 
 $myInvites = getInvites($mysqli, $user_id);
 $num_inv = count($myInvites);

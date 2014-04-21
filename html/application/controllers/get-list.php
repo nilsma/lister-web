@@ -6,7 +6,7 @@ echo <<<EOF
 	  <section class="list_container">
 	    <section class="list_header">
 	      <h3 id="current_list" class="list_name">$cur_title</h3>
-	      <h3 id="delete_button" class="remove_list" onClick="javascript:deleteList()">delete</h3>
+	      <h3 id="delete_button" class="remove_list" onClick="javascript:deleteOwnerList()">delete</h3>
             </section> <!-- end list_header -->
 	    <section class="shopping_list">
 	      <table id="products_table" class="shopping_table">

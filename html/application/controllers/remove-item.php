@@ -16,12 +16,12 @@ $item = html(trim($_POST['item']));
 $user_id = $_SESSION['user_id'];
 $list_id = $_SESSION['cur_id'];
 
+//TODO add owner/membership check
 if (mysqli_connect_errno()) {
   printf("Connect failed: %s\n", mysqli_connect_error());
   exit();
 }
 
-//$query = "DELETE FROM products WHERE name=? AND list_id=? AND (SELECT u.id FROM users as u, owners as o, lists as l WHERE u.id=? AND u.id=o.user_id AND o.list_id=l.id AND l.id=?) LIMIT 1";
 $query = "DELETE FROM products WHERE name=? AND list_id=? LIMIT 1";
 
 $stmt = $mysqli->stmt_init();
@@ -29,7 +29,6 @@ $stmt = $mysqli->stmt_init();
 if(!$stmt->prepare($query)) {
   print("Failed to prepare statement in remove-item.php() ...");
 } else {
-//  $stmt->bind_param('siii',$item, $list_id, $user_id, $list_id);
   $stmt->bind_param('si',$item, $list_id);
   $stmt->execute();
 }
